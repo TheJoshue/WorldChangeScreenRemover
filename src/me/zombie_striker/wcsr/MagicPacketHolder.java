@@ -111,8 +111,6 @@ public class MagicPacketHolder implements Listener {
 									pc2.getIntegers().write(0, event.getPlayer().getLocation().getChunk().getX())
 											.write(1, event.getPlayer().getLocation().getChunk().getZ());
 									protocolManager.sendServerPacket(event.getPlayer(), pc2);
-								} catch (InvocationTargetException e) {
-									// e.printStackTrace();
 								} catch (IllegalArgumentException e){
 
 								}
@@ -129,8 +127,6 @@ public class MagicPacketHolder implements Listener {
 													.createPacket(PacketType.Play.Server.UNLOAD_CHUNK);
 											pc.getIntegers().write(0, x).write(1, z);
 											protocolManager.sendServerPacket(event.getPlayer(), pc);
-										} catch (InvocationTargetException e) {
-											// e.printStackTrace();
 										} catch (IllegalArgumentException e){
 
 										}
@@ -176,22 +172,14 @@ public class MagicPacketHolder implements Listener {
 													PacketType.Play.Server.UPDATE_TIME);
 											pc.getLongs().write(0, event.getPlayer().getWorld().getFullTime());
 											pc.getLongs().write(1, event.getPlayer().getWorld().getTime());
-											try {
-												protocolManager.sendServerPacket(event.getPlayer(), pc);
-											} catch (InvocationTargetException e) {
-												e.printStackTrace();
-											}
+											protocolManager.sendServerPacket(event.getPlayer(), pc);
 
 											if (isRaining != event.getPlayer().getWorld().isThundering()) {
 												PacketContainer pc2 = new PacketContainer(
 														PacketType.Play.Server.GAME_STATE_CHANGE);
 												pc2.getModifier().write(0,
 														event.getPlayer().getWorld().isThundering() ? 2 : 1);
-												try {
-													protocolManager.sendServerPacket(event.getPlayer(), pc2);
-												} catch (InvocationTargetException e) {
-													e.printStackTrace();
-												}
+												protocolManager.sendServerPacket(event.getPlayer(), pc2);
 											}
 										}
 									}.runTaskLater(thi, 1);
@@ -208,25 +196,17 @@ public class MagicPacketHolder implements Listener {
 									public void run() {
 										if (getHolder(event.getPlayer().getUniqueId()) != null) {
 											quickSkippers.add(event.getPlayer().getUniqueId());
-											try {
-												protocolManager.sendServerPacket(event.getPlayer(),
-														getHolder(event.getPlayer().getUniqueId()));
-											} catch (InvocationTargetException e1) {
-												e1.printStackTrace();
-											}
+											protocolManager.sendServerPacket(event.getPlayer(),
+													getHolder(event.getPlayer().getUniqueId()));
 
 											quickSkippers.remove(event.getPlayer().getUniqueId());
 											setHolder(event.getPlayer().getUniqueId(), null);
 											if (temppLocations.get(event.getPlayer().getUniqueId()) != null) {
 												for (int i = 0; i < temppLocations.get(event.getPlayer().getUniqueId())
 														.size(); i++) {
-													try {
-														protocolManager.sendServerPacket(event.getPlayer(),
-																temppLocations.get(event.getPlayer().getUniqueId())
-																		.get(i));
-													} catch (InvocationTargetException e1) {
-														e1.printStackTrace();
-													}
+													protocolManager.sendServerPacket(event.getPlayer(),
+															temppLocations.get(event.getPlayer().getUniqueId())
+																	.get(i));
 												}
 											}
 											temppLocations.get(event.getPlayer().getUniqueId()).clear();
