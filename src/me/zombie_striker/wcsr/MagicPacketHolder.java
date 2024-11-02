@@ -251,11 +251,11 @@ public class MagicPacketHolder implements Listener {
 						}
 						if (thi.tempNausea) {
 							e.getPlayer().addPotionEffect(
-									new PotionEffect(PotionEffectType.CONFUSION, (int) (20 * thi.effectDelay), 2));
+									new PotionEffect(PotionEffectType.DARKNESS, (int) (20 * thi.effectDelay), 2));
 						}
 						if (thi.tempSlowness) {
 							e.getPlayer().addPotionEffect(
-									new PotionEffect(PotionEffectType.SLOW, (int) (20 * thi.effectDelay) - 5, 2));
+									new PotionEffect(PotionEffectType.SLOWNESS, (int) (20 * thi.effectDelay) - 5, 2));
 						}
 					}
 				}.runTaskLater(thi, 5);
